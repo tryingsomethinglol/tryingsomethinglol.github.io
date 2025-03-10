@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Next Step</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .secret-box {
+            background-color: #1e1e1e;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 400px;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 1s ease-in-out, transform 0.5s ease-in-out;
+        }
+
+        h2 {
+            color: #ffcc00;
+        }
+
+        .hidden-message {
+            color: #4CAF50;
+            font-size: 18px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .reveal {
+            opacity: 1;
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body>
+    <div class="secret-box" id="secretBox">
+        <h2>Congratulations! 🎉</h2>
+        <p>You have solved the riddle.</p>
+        <p class="hidden-message" id="hiddenMessage">The final key is: "s4cr3t"</p>
+    </div>
+
+    <script>
+        // Reveal the message with animation
+        setTimeout(() => {
+            document.getElementById("secretBox").classList.add("reveal");
+        }, 500);
+
+        // Show the hidden message after 5 seconds
+        setTimeout(() => {
+            document.getElementById("hiddenMessage").style.display = "block";
+        }, 5000);
+
+        // Redirect to Discord after 10 seconds
+        setTimeout(() => {
+            window.location.href = "https://discord.gg/XeamtAjx";
+        }, 10000);
+    </script>
+</body>
+</html>
